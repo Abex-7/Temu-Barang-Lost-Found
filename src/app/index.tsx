@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   tombol: {
-    backgroundColor: "#2563eb",
+    backgroundColor: "#16a34a",
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: "center",

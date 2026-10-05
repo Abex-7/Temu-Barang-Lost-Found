@@ -8,7 +8,7 @@ export const daftarBarang: Barang[] = [
     kategori: "Dompet",
     lokasi: "Kantin Kampus 3",
     status: "Ditemukan",
-    gambar: "https://picsum.photos/seed/dompet/200",
+    gambar: "https://down-id.img.susercontent.com/file/2fbaa452a35ffd4b90efa21333f7b5b8",
   },
   {
     id: "2",
@@ -16,7 +16,7 @@ export const daftarBarang: Barang[] = [
     kategori: "Kunci",
     lokasi: "Parkiran Gedung A",
     status: "Dicari",
-    gambar: "https://picsum.photos/seed/kunci/200",
+    gambar: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/04/24/4264389151.jpg",
   },
   {
     id: "3",
@@ -24,7 +24,7 @@ export const daftarBarang: Barang[] = [
     kategori: "Elektronik",
     lokasi: "Lab Informatika",
     status: "Ditemukan",
-    gambar: "https://picsum.photos/seed/flashdisk/200",
+    gambar: "https://down-id.img.susercontent.com/file/id-11134207-8224r-miagea6rxs76ff",
   },
   {
     id: "4",
@@ -32,7 +32,7 @@ export const daftarBarang: Barang[] = [
     kategori: "Tas",
     lokasi: "Perpustakaan",
     status: "Dicari",
-    gambar: "https://picsum.photos/seed/tas/200",
+    gambar: "https://down-id.img.susercontent.com/file/id-11134207-7qul2-ljs0qncgehrbf9",
   },
 ];
 

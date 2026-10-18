@@ -4,19 +4,19 @@ import { Barang, StatusBarang } from "../types/barang";
 export const daftarBarang: Barang[] = [
   {
     id: "1",
-    nama: "Dompet Kulit Coklat",
-    kategori: "Dompet",
+    nama: "Kunci Motor",
+    kategori: "Kunci",
     lokasi: "Kantin Kampus 3",
     status: "Ditemukan",
-    gambar: "https://down-id.img.susercontent.com/file/2fbaa452a35ffd4b90efa21333f7b5b8",
+    gambar: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/04/24/4264389151.jpg",
   },
   {
     id: "2",
-    nama: "Kunci Motor Honda",
-    kategori: "Kunci",
+    nama: "Dompet Kulit Coklat",
+    kategori: "Dompet",
     lokasi: "Parkiran Gedung A",
     status: "Dicari",
-    gambar: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/04/24/4264389151.jpg",
+    gambar: "https://down-id.img.susercontent.com/file/2fbaa452a35ffd4b90efa21333f7b5b8",
   },
   {
     id: "3",

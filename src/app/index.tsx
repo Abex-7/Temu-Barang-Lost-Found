@@ -1,19 +1,22 @@
 import {
-  View,
-  Text,
-  ScrollView,
-  Pressable,
   Alert,
+  Pressable,
+  ScrollView,
   StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import SearchBar from "../components/SearchBar";
 import BarangCard from "../components/BarangCard";
+import SearchBar from "../components/SearchBar";
 import { daftarBarang } from "../data/barang";
 
 export default function Index() {
   // Custom function: dipanggil saat tombol ditekan
   const laporBarang = () => {
-    Alert.alert("Lapor Barang", "Fitur lapor barang akan hadir di modul berikutnya.");
+    Alert.alert(
+      "Lapor Barang",
+      "Fitur lapor barang akan hadir di modul berikutnya.",
+    );
   };
 
   return (
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   tombol: {
-    backgroundColor: "#16a34a",
+    backgroundColor: "#ed0b0b",
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: "center",

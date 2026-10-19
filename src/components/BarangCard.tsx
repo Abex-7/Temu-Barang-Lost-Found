@@ -1,29 +1,49 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import { styles } from "../styles/styles";
 import { Barang } from "../types/barang";
 
-// Props: data satu barang yang dikirim dari halaman utama
 interface BarangCardProps {
   barang: Barang;
+  disimpan: boolean;
+  onPress: () => void;
+  onToggleSimpan: () => void;
 }
 
-export default function BarangCard({ barang }: BarangCardProps) {
-  // Warna badge bergantung pada status, jadi dipakai inline style
-  const warnaBadge = barang.status === "Ditemukan" ? "#16a34a" : "#f97316";
+export default function BarangCard({
+  barang,
+  disimpan,
+  onPress,
+  onToggleSimpan,
+}: BarangCardProps) {
+  // Warna teks label bergantung pada status, jadi dipakai inline style
+  const warnaStatus = barang.status === "Ditemukan" ? "#16a34a" : "#f97316";
 
   return (
-    <View style={styles.card}>
-      <Image source={{ uri: barang.gambar }} style={styles.gambar} />
+    <Pressable style={styles.card} onPress={onPress}>
+      <View style={styles.gambarWrap}>
+        <Image source={{ uri: barang.gambar }} style={styles.gambar} />
 
-      <View style={styles.info}>
-        <Text style={styles.nama}>{barang.nama}</Text>
-        <Text style={styles.detail}>Kategori: {barang.kategori}</Text>
-        <Text style={styles.detail}>Lokasi: {barang.lokasi}</Text>
-
-        <View style={[styles.badge, { backgroundColor: warnaBadge }]}>
-          <Text style={styles.badgeText}>{barang.status}</Text>
+        {/* Label status di kiri atas */}
+        <View style={styles.pill}>
+          <Text style={[styles.pillText, { color: warnaStatus }]}>
+            {barang.status}
+          </Text>
         </View>
+
+        {/* Hati di kanan atas */}
+        <Pressable style={styles.hati} onPress={onToggleSimpan}>
+          <Text style={[styles.hatiText, disimpan && styles.hatiAktif]}>
+            {disimpan ? "♥" : "♡"}
+          </Text>
+        </Pressable>
       </View>
-    </View>
+
+      <Text style={styles.nama} numberOfLines={1}>
+        {barang.nama}
+      </Text>
+      <Text style={styles.detail} numberOfLines={1}>
+        {barang.lokasi} · {barang.kategori}
+      </Text>
+    </Pressable>
   );
 }

@@ -58,7 +58,10 @@ export default function Index() {
   };
 
   const laporBarang = () => {
-    Alert.alert("Lapor Barang", "Fitur lapor barang akan hadir di modul berikutnya.");
+    Alert.alert(
+      "Lapor Barang",
+      "Fitur lapor barang akan hadir di modul berikutnya.",
+    );
   };
 
   // Pisahkan hasil menjadi dua kelompok untuk dua section

@@ -137,3 +137,37 @@ export default function Index() {
     </SafeAreaView>
   );
 }
+<<<<<<< Updated upstream
+=======
+
+// Internal styling
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f1f5f9",
+    padding: 16,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#0f172a",
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "#64748b",
+    marginBottom: 16,
+  },
+  tombol: {
+    backgroundColor: "#a31616",
+    borderRadius: 12,
+    paddingVertical: 14,
+    alignItems: "center",
+    marginTop: 8,
+  },
+  tombolText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
+>>>>>>> Stashed changes

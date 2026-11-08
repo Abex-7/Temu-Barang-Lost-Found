@@ -19,7 +19,7 @@ export const daftarBarang: Barang[] = [
     gambar: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/04/24/4264389151.jpg",
   },
   {
-<<<<<<< Updated upstream
+
     id: "2",
     nama: "Dompet Kulit Coklat",
     kategori: "Dompet",
@@ -28,8 +28,7 @@ export const daftarBarang: Barang[] = [
     gambar: "https://down-id.img.susercontent.com/file/2fbaa452a35ffd4b90efa21333f7b5b8",
   },
   {
-=======
->>>>>>> Stashed changes
+
     id: "3",
     nama: "Flashdisk Hitam 32GB",
     kategori: "Elektronik",

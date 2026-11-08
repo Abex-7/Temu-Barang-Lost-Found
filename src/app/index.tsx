@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar";
 import BarangSection from "../components/BarangSection";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-import { muatDaftarBarang } from "../service/barangservice";
+import { muatDaftarBarang } from "../services/barangService";
 import { Barang, StatusBarang } from "../types/barang";
 import { styles, colors } from "../styles/styles";
 

@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Loading from "../../components/Loading";
 import { styles, colors } from "../../styles/styles";
 import { getStatusLabel } from "../../data/barang";
-import { muatDetailBarang } from "../../service/barangservice";
+import { muatDetailBarang } from "../../services/barangService";
 import { Barang } from "../../types/barang";
 
 export default function DetailBarang() {

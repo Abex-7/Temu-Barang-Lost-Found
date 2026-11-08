@@ -1,4 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../styles/styles";
 
 interface ErrorMessageProps {
   pesan: string;
@@ -8,43 +10,93 @@ interface ErrorMessageProps {
 export default function ErrorMessage({ pesan, onUlangi }: ErrorMessageProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.judul}>Gagal memuat data</Text>
-      <Text style={styles.pesan}>{pesan}</Text>
+      <View style={styles.card}>
+        <View style={styles.iconWrap}>
+          <Ionicons
+            name="alert-circle"
+            size={36}
+            color={colors.primary}
+          />
+        </View>
+        <Text style={styles.judul}>Gagal Memuat Data</Text>
+        <Text style={styles.pesan}>{pesan}</Text>
 
-      <Pressable style={styles.tombol} onPress={onUlangi}>
-        <Text style={styles.tombolText}>Coba Lagi</Text>
-      </Pressable>
+        <Pressable
+          style={styles.tombol}
+          onPress={onUlangi}
+          android_ripple={{ color: "rgba(255, 255, 255, 0.2)" }}
+        >
+          <Ionicons name="refresh" size={16} color="#FFFFFF" style={{ marginRight: 6 }} />
+          <Text style={styles.tombolText}>Coba Lagi</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 36,
+    paddingHorizontal: 20,
     alignItems: "center",
-    paddingVertical: 48,
-    paddingHorizontal: 24,
+  },
+  card: {
+    width: "100%",
+    backgroundColor: colors.surface,
+    borderRadius: 20,
+    padding: 24,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  iconWrap: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.secondaryTint,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.secondaryTintBorder,
   },
   judul: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#ef4444",
+    fontSize: 17,
+    fontWeight: "800",
+    color: colors.textPrimary,
     marginBottom: 6,
+    letterSpacing: -0.2,
   },
   pesan: {
-    fontSize: 14,
-    color: "#64748b",
+    fontSize: 13,
+    color: colors.textSecondary,
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: 18,
+    lineHeight: 18,
   },
   tombol: {
-    backgroundColor: "#16a322",
-    borderRadius: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.primary,
+    borderRadius: 24,
     paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingHorizontal: 26,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 3,
   },
   tombolText: {
-    color: "#ffffff",
-    fontSize: 15,
-    fontWeight: "bold",
+    color: colors.textInverted,
+    fontSize: 14,
+    fontWeight: "700",
+    letterSpacing: 0.2,
   },
 });

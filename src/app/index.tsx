@@ -28,7 +28,7 @@ export default function Index() {
   const [tab, setTab] = useState<Tab>("Semua");
 
   // STATE 3: daftar barang hasil pencarian + tab
-  const [hasil, setHasil] = useState<Barang[]>(daftarBarang);
+  const [result, setResult] = useState<Barang[]>(daftarBarang);
 
   // STATE 4: id barang yang disimpan (hati)
   const [disimpan, setDisimpan] = useState<string[]>([]);
@@ -36,7 +36,7 @@ export default function Index() {
   // EFFECT: hitung ulang hasil setiap keyword atau tab berubah
   useEffect(() => {
     const hasilCari = cariBarang(keyword.trim());
-    setHasil(
+    setResult(
       tab === "Semua"
         ? hasilCari
         : hasilCari.filter((barang) => barang.status === tab)
@@ -65,8 +65,8 @@ export default function Index() {
   };
 
   // Pisahkan hasil menjadi dua kelompok untuk dua section
-  const ditemukan = hasil.filter((barang) => barang.status === "Ditemukan");
-  const dicari = hasil.filter((barang) => barang.status === "Dicari");
+  const ditemukan = result.filter((barang) => barang.status === "Ditemukan");
+  const dicari = result.filter((barang) => barang.status === "Dicari");
 
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
@@ -104,7 +104,7 @@ export default function Index() {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.scrollContent}
       >
-        {hasil.length === 0 && (
+        {result.length === 0 && (
           <Text style={styles.kosong}>Barang tidak ditemukan</Text>
         )}
 
@@ -137,3 +137,5 @@ export default function Index() {
     </SafeAreaView>
   );
 }
+
+

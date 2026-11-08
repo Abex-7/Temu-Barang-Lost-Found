@@ -47,3 +47,10 @@ export default function BarangCard({
     </Pressable>
   );
 }
+// 15
+//const warnaStatus =
+ // barang.status === "Ditemukan" ? "#15803d" : "#dc2626";
+ //41 
+ //<Text style={styles.nama} numberOfLines={2}>
+  //{barang.nama}
+//</Text>

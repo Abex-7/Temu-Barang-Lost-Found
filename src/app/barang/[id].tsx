@@ -13,7 +13,7 @@ export default function DetailBarang() {
   const barang = daftarBarang.find((item) => item.id === id);
 
   // Kembali ke halaman sebelumnya; kalau tidak ada riwayat, ganti ke beranda
-  const kembali = () => {
+  const kembali = () => { //back
     if (router.canGoBack()) {
       router.back();
     } else {

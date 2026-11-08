@@ -1,5 +1,6 @@
 import { View, Text, Image, Pressable } from "react-native";
-import { styles } from "../styles/styles";
+import { Ionicons } from "@expo/vector-icons";
+import { styles, colors } from "../styles/styles";
 import { Barang } from "../types/barang";
 
 interface BarangCardProps {
@@ -15,35 +16,58 @@ export default function BarangCard({
   onPress,
   onToggleSimpan,
 }: BarangCardProps) {
-  // Warna teks label bergantung pada status, jadi dipakai inline style
-  const warnaStatus = barang.status === "Ditemukan" ? "#16a34a" : "#f97316";
+  const isDitemukan = barang.status === "Ditemukan";
 
   return (
-    <Pressable style={styles.card} onPress={onPress}>
+    <Pressable
+      style={styles.card}
+      onPress={onPress}
+      android_ripple={{ color: "rgba(88, 24, 37, 0.08)" }}
+    >
       <View style={styles.gambarWrap}>
-        <Image source={{ uri: barang.gambar }} style={styles.gambar} />
+        <Image
+          source={{ uri: barang.gambar }}
+          style={styles.gambar}
+        />
 
-        {/* Label status di kiri atas */}
+        {/* Tag status di kiri atas berlatar soft maroon / muted tint */}
         <View style={styles.pill}>
-          <Text style={[styles.pillText, { color: warnaStatus }]}>
+          <Text style={styles.pillText}>
+            {isDitemukan ? "✓ " : "• "}
             {barang.status}
           </Text>
         </View>
 
-        {/* Hati di kanan atas */}
-        <Pressable style={styles.hati} onPress={onToggleSimpan}>
-          <Text style={[styles.hatiText, disimpan && styles.hatiAktif]}>
-            {disimpan ? "♥" : "♡"}
-          </Text>
+        {/* Tombol Simpan / Hati di kanan atas */}
+        <Pressable
+          style={styles.hati}
+          onPress={onToggleSimpan}
+          hitSlop={6}
+        >
+          <Ionicons
+            name={disimpan ? "heart" : "heart-outline"}
+            size={18}
+            color={disimpan ? colors.primary : colors.textSecondary}
+          />
         </Pressable>
       </View>
 
-      <Text style={styles.nama} numberOfLines={1}>
-        {barang.nama}
-      </Text>
-      <Text style={styles.detail} numberOfLines={1}>
-        {barang.lokasi} · {barang.kategori}
-      </Text>
+      <View style={styles.cardContent}>
+        <Text style={styles.nama} numberOfLines={1}>
+          {barang.nama}
+        </Text>
+
+        <View style={styles.cardMetaRow}>
+          <Ionicons
+            name="location-outline"
+            size={13}
+            color={colors.primary}
+          />
+          <Text style={styles.detail} numberOfLines={1}>
+            {barang.lokasi} · {barang.kategori}
+          </Text>
+        </View>
+      </View>
     </Pressable>
   );
 }

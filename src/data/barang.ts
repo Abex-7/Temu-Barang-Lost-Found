@@ -59,5 +59,7 @@ export function getStatusLabel(status: StatusBarang): string {
 export const cariBarang = (kataKunci: string): Barang[] => {
   return daftarBarang.filter((barang) =>
     barang.nama.toLowerCase().includes(kataKunci.toLowerCase())
+
+
   );
 };

@@ -1,7 +1,8 @@
 import { View, Text, ScrollView, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import BarangCard from "./BarangCard";
 import { Barang } from "../types/barang";
-import { styles } from "../styles/styles";
+import { styles, colors } from "../styles/styles";
 
 interface BarangSectionProps {
   judul: string;
@@ -22,10 +23,27 @@ export default function BarangSection({
 }: BarangSectionProps) {
   return (
     <View style={styles.section}>
-      {/* Judul + panah: ditekan untuk memfilter tab */}
-      <Pressable style={styles.sectionHeader} onPress={onLihatSemua}>
-        <Text style={styles.sectionTitle}>{judul}</Text>
-        <Text style={styles.sectionPanah}>›</Text>
+      {/* Header section dengan judul tebal dan action button */}
+      <Pressable
+        style={styles.sectionHeader}
+        onPress={onLihatSemua}
+        hitSlop={8}
+      >
+        <View style={styles.sectionTitleRow}>
+          <Text style={styles.sectionTitle}>{judul}</Text>
+          <View style={styles.sectionCountBadge}>
+            <Text style={styles.sectionCountText}>{data.length}</Text>
+          </View>
+        </View>
+
+        <View style={styles.sectionAction}>
+          <Text style={styles.sectionActionText}>Lihat Semua</Text>
+          <Ionicons
+            name="chevron-forward"
+            size={16}
+            color={colors.primary}
+          />
+        </View>
       </Pressable>
 
       <ScrollView

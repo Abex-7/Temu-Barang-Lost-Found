@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" width="760" height="180">
+  <defs>
+    <linearGradient id="burgundyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B1D2F" />
+      <stop offset="100%" stop-color="#581825" />
+    </linearGradient>
+  </defs>
+
+  <!-- ICON EMBLEM (LEFT) -->
+  <g transform="translate(20, 15)">
+    <!-- Squircle Container -->
+    <rect x="0" y="0" width="150" height="150" rx="36" fill="url(#burgundyGrad)" />
+    
+    <!-- Pin & Search Combination -->
+    <g transform="translate(75, 70) scale(0.38)">
+      <path d="M 0 -130 
+               C 72 -130, 130 -72, 130 0 
+               C 130 65, 50 145, 0 190 
+               C -50 145, -130 65, -130 0 
+               C -130 -72, -72 -130, 0 -130 Z" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="26" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" />
+
+      <path d="M 85 95 L 140 150" 
+            stroke="#FFFFFF" 
+            stroke-width="26" 
+            stroke-linecap="round" />
+
+      <rect x="-38" y="-38" width="76" height="76" rx="18" fill="#FFFFFF" fill-opacity="0.15" stroke="#FFFFFF" stroke-width="8" />
+      <path d="M 0 -24 Q 0 0 -24 0 Q 0 0 0 24 Q 0 0 24 0 Q 0 0 0 -24 Z" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- WORDMARK TYPOGRAPHY (RIGHT) -->
+  <g transform="translate(195, 30)">
+    <!-- TEMU BARANG Header -->
+    <text x="0" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', Helvetica, Arial, sans-serif" font-size="44" font-weight="900" fill="#581825" letter-spacing="-1">
+      TEMU<tspan fill="#3F0F19">BARANG</tspan>
+    </text>
+
+    <!-- Subtitle with Pill Badge -->
+    <g transform="translate(0, 72)">
+      <rect x="0" y="0" width="168" height="30" rx="15" fill="#FBEAEB" stroke="#F2D6D8" stroke-width="1.5" />
+      <text x="14" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Text', Helvetica, Arial, sans-serif" font-size="13" font-weight="800" fill="#581825" letter-spacing="1.5">
+        LOST &amp; FOUND
+      </text>
+
+      <text x="180" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Text', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#7A7A7A" letter-spacing="0.2">
+        Sistem Informasi Kampus UMM
+      </text>
+    </g>
+  </g>
+</svg>

@@ -1,9 +1,10 @@
 import { Barang, StatusBarang } from "../types/barang";
 import { ProdukApi, ProdukApiResponse } from "../types/api";
+import { supabase, isSupabaseConfigured } from "../lib/supabase";
+import { daftarBarang as fallbackBarang } from "../data/barang";
 
-const BASE_URL = "https://dummyjson.com/products";
+const DUMMY_API_URL = "https://dummyjson.com/products";
 
-// Lokasi BUKAN dari API: dipilih dari daftar ini berdasarkan id (simulasi)
 const daftarLokasi = [
   "Kantin Kampus 3",
   "Parkiran Gedung A",
@@ -13,11 +14,8 @@ const daftarLokasi = [
   "Gedung Rektorat",
 ];
 
-// Mengubah data API (ProdukApi) menjadi object Barang milik aplikasi
-function petakanKeBarang(produk: ProdukApi): Barang {
-  // Status BUKAN dari API: id genap = Ditemukan, id ganjil = Dicari (simulasi)
+function petakanProdukKeBarang(produk: ProdukApi): Barang {
   const status: StatusBarang = produk.id % 2 === 0 ? "Ditemukan" : "Dicari";
-
   return {
     id: String(produk.id),
     nama: produk.title,
@@ -28,36 +26,145 @@ function petakanKeBarang(produk: ProdukApi): Barang {
   };
 }
 
-// CUSTOM ASYNC FUNCTION 1: memakai Promise constructor, then(), resolve(), reject()
-export function muatDaftarBarang(): Promise<Barang[]> {
-  return new Promise<Barang[]>((resolve, reject) => {
-    fetch(`${BASE_URL}?limit=10`)
-      .then((response) => {
-        // fetch tidak error untuk status 404/500, jadi dicek manual
-        if (!response.ok) {
-          throw new Error(`Server membalas status ${response.status}`);
-        }
-        return response.json() as Promise<ProdukApiResponse>;
-      })
-      .then((data) => {
-        if (data.products.length === 0) {
-          reject(new Error("Data dari server kosong"));
-          return;
-        }
-        resolve(data.products.map(petakanKeBarang));
-      })
-      .catch((error: Error) => reject(error));
-  });
-}
+/**
+ * SELECT: Mengambil daftar barang dari Supabase Cloud (PostgreSQL).
+ * Jika Supabase belum diisi credential atau offline, otomatis fallback ke API Modul 3.
+ */
+export async function muatDaftarBarang(): Promise<Barang[]> {
+  if (isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from("barang")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-// CUSTOM ASYNC FUNCTION 2: memakai async/await
-export async function muatDetailBarang(id: string): Promise<Barang> {
-  const response = await fetch(`${BASE_URL}/${id}`);
-
-  if (!response.ok) {
-    throw new Error(`Barang tidak ditemukan (status ${response.status})`);
+      if (!error && data) {
+        return data as Barang[];
+      }
+    } catch {
+      // Lanjut ke fallback jika koneksi Supabase gagal
+    }
   }
 
-  const produk: ProdukApi = await response.json();
-  return petakanKeBarang(produk);
+  // Fallback API Codelab Modul 3 (DummyJSON)
+  try {
+    const res = await fetch(`${DUMMY_API_URL}?limit=10`);
+    if (res.ok) {
+      const json: ProdukApiResponse = await res.json();
+      if (json.products && json.products.length > 0) {
+        return json.products.map(petakanProdukKeBarang);
+      }
+    }
+  } catch {
+    // Fallback data lokal jika internet offline
+  }
+
+  return fallbackBarang;
+}
+
+/**
+ * SELECT (Detail): Mengambil data satu barang berdasarkan ID.
+ */
+export async function muatDetailBarang(id: string): Promise<Barang> {
+  if (isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from("barang")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (!error && data) {
+        return data as Barang;
+      }
+    } catch {
+      // Lanjut ke fallback
+    }
+  }
+
+  // Fallback API DummyJSON jika ID numerik
+  if (!isNaN(Number(id))) {
+    try {
+      const res = await fetch(`${DUMMY_API_URL}/${id}`);
+      if (res.ok) {
+        const produk: ProdukApi = await res.json();
+        return petakanProdukKeBarang(produk);
+      }
+    } catch {
+      // Abaikan
+    }
+  }
+
+  // Fallback data lokal
+  const item = fallbackBarang.find((b) => b.id === id);
+  if (item) return item;
+
+  throw new Error(`Barang dengan id "${id}" tidak ditemukan.`);
+}
+
+/**
+ * INSERT: Menambahkan barang baru ke Supabase PostgreSQL.
+ * Sesuai RLS Codelab 5, user_id otomatis terisi dari user yang sedang login.
+ */
+export async function tambahBarangBaru(dataBarang: {
+  nama: string;
+  kategori: string;
+  lokasi: string;
+  status: StatusBarang;
+  gambar?: string;
+  kontak?: string;
+}): Promise<Barang> {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const payload = {
+    ...dataBarang,
+    user_id: user?.id,
+    gambar:
+      dataBarang.gambar?.trim() ||
+      `https://picsum.photos/seed/${encodeURIComponent(dataBarang.nama)}/200`,
+  };
+
+  const { data, error } = await supabase
+    .from("barang")
+    .insert([payload])
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as Barang;
+}
+
+/**
+ * UPDATE: Memperbarui data barang (hanya pemilik yang diizinkan oleh RLS).
+ */
+export async function perbaruiBarang(
+  id: string,
+  pembaruan: Partial<Barang>
+): Promise<Barang> {
+  const { data, error } = await supabase
+    .from("barang")
+    .update(pembaruan)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as Barang;
+}
+
+/**
+ * DELETE: Menghapus data barang (hanya pemilik yang diizinkan oleh RLS).
+ */
+export async function hapusBarang(id: string): Promise<void> {
+  const { error } = await supabase.from("barang").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BarangCard from "./BarangCard";
@@ -23,7 +24,7 @@ export default function BarangSection({
 }: BarangSectionProps) {
   return (
     <View style={styles.section}>
-      {/* Header section dengan judul tebal dan action button */}
+      {/* Header section bergaya DoorDash dengan judul tegas & action */}
       <Pressable
         style={styles.sectionHeader}
         onPress={onLihatSemua}
@@ -40,7 +41,7 @@ export default function BarangSection({
           <Text style={styles.sectionActionText}>Lihat Semua</Text>
           <Ionicons
             name="chevron-forward"
-            size={16}
+            size={15}
             color={colors.primary}
           />
         </View>

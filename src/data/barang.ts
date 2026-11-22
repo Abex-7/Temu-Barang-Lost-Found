@@ -44,6 +44,8 @@ export const daftarBarang: Barang[] = [
     status: "Dicari",
     gambar: "https://down-id.img.susercontent.com/file/id-11134207-7qul2-ljs0qncgehrbf9",
   },
+
+  
 ];
 
 // Custom function: mengubah status menjadi kalimat keterangan

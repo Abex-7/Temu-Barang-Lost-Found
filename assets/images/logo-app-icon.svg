@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="appIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B1D2F" />
+      <stop offset="50%" stop-color="#581825" />
+      <stop offset="100%" stop-color="#340C14" />
+    </linearGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.4" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1024" height="1024" rx="240" fill="url(#appIconGrad)" />
+  <rect width="1024" height="1024" rx="240" fill="url(#innerGlow)" />
+  <rect x="16" y="16" width="992" height="992" rx="230" fill="none" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="8" />
+
+  <!-- Centered Iconic Emblem -->
+  <g transform="translate(512, 480) scale(1.65)">
+    <!-- Pin & Search Combination -->
+    <path d="M 0 -130 
+             C 72 -130, 130 -72, 130 0 
+             C 130 65, 50 145, 0 190 
+             C -50 145, -130 65, -130 0 
+             C -130 -72, -72 -130, 0 -130 Z" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="26" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+
+    <!-- Magnifier Handle -->
+    <path d="M 85 95 L 145 155" 
+          stroke="#FFFFFF" 
+          stroke-width="26" 
+          stroke-linecap="round" />
+
+    <!-- Center Package & Sparkle -->
+    <rect x="-42" y="-42" width="84" height="84" rx="20" fill="#FFFFFF" fill-opacity="0.15" stroke="#FFFFFF" stroke-width="8" />
+    <path d="M 0 -26 Q 0 0 -26 0 Q 0 0 0 26 Q 0 0 26 0 Q 0 0 0 -26 Z" fill="#FFFFFF" />
+    <circle cx="0" cy="0" r="5" fill="#581825" />
+  </g>
+
+  <!-- Small Bottom Brand Dot & Text -->
+  <g transform="translate(512, 880)">
+    <text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800" fill="#FBEAEB" letter-spacing="8">
+      TEMU BARANG
+    </text>
+  </g>
+</svg>
